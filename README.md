@@ -1,5 +1,10 @@
 # PyContextFold
 
+[![PyPI](https://img.shields.io/pypi/v/pycontextfold.svg)](https://pypi.org/project/pycontextfold/)
+[![Python versions](https://img.shields.io/pypi/pyversions/pycontextfold.svg)](https://pypi.org/project/pycontextfold/)
+[![CI](https://github.com/Mullassery/PyContextFold/actions/workflows/tests.yml/badge.svg)](https://github.com/Mullassery/PyContextFold/actions/workflows/tests.yml)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+
 **Local-first, structure-aware context optimization for LLM consumption.**
 
 PyContextFold transforms source code, technical documentation, logs and
@@ -57,14 +62,19 @@ cargo install --path crates/contextfold-cli
 ### Python
 
 ```bash
+pip install pycontextfold
+```
+
+Requires Python ≥ 3.10 (the wheel is built `abi3-py310`). To build the latest
+development version from source instead:
+
+```bash
 python -m venv .venv && source .venv/bin/activate
 pip install maturin
 maturin develop --release
 # or build a wheel:
 maturin build --release
 ```
-
-Requires Python ≥ 3.10 (the wheel is built `abi3-py310`).
 
 ## Quick start
 

@@ -7,7 +7,13 @@ use.
 
 ## Python
 
-Install (from the repository):
+Install from PyPI:
+
+```bash
+pip install pycontextfold
+```
+
+Or build an editable version from the repository:
 
 ```bash
 python -m venv .venv && source .venv/bin/activate
