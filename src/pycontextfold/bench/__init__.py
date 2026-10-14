@@ -10,12 +10,24 @@ loaded lazily.
 Phase 1 provides the foundation: models, capabilities, the adapter protocol +
 registry, deterministic baselines, token measurement and metrics. Phase 2 adds
 the offline experiment runner (:mod:`pycontextfold.bench.runner`) and portable
-run-result artifacts (:mod:`pycontextfold.bench.runs`).
+run-result artifacts (:mod:`pycontextfold.bench.runs`). Phase 3 adds a
+self-contained HTML report (:mod:`pycontextfold.bench.report`).
 """
 
 from __future__ import annotations
 
-from . import adapters, chunking, config, dataset, metrics, models, runner, runs, tokens
+from . import (
+    adapters,
+    chunking,
+    config,
+    dataset,
+    metrics,
+    models,
+    report,
+    runner,
+    runs,
+    tokens,
+)
 from .capabilities import Capability, CapabilitySet
 from .models import (
     DATASET_SCHEMA_VERSION,
@@ -28,6 +40,7 @@ from .models import (
     OptimizationRequest,
     OptimizationResult,
 )
+from .report import render_report, write_report
 from .runner import Runner, run_experiment
 from .runs import AdapterRun, DocumentRun, RunResult
 
@@ -53,8 +66,11 @@ __all__ = [
     "dataset",
     "metrics",
     "models",
+    "render_report",
+    "report",
     "run_experiment",
     "runner",
     "runs",
     "tokens",
+    "write_report",
 ]

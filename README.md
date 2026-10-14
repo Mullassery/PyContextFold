@@ -152,6 +152,20 @@ reported as *unavailable* rather than silently substituted. See
 [`docs/ROADMAP.md`](docs/ROADMAP.md) and
 [`docs/ECOSYSTEM_ASSESSMENT.md`](docs/ECOSYSTEM_ASSESSMENT.md).
 
+Run a whole experiment and emit a single-file HTML report (no CDN, fully
+offline):
+
+```python
+from pycontextfold import bench
+
+run = bench.run_experiment(
+    bench.dataset.synthetic_dataset(),
+    bench.ExperimentConfig(name="demo", dataset="synthetic",
+                           adapters=("baseline", "contextfold")),
+)
+bench.write_report(run, "report.html")   # self-contained, deterministic
+```
+
 ## Command-line tool (optional)
 
 Installing the package gives you the Python library. The repository also ships a

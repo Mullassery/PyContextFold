@@ -26,6 +26,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   deterministic, with failure isolation (per-document adapter errors and
   unregistered/unavailable adapters are recorded, not fatal) and JSON run
   artifacts (`RunResult`, `write_run`/`read_run`) carrying content hashes.
+- **`pycontextfold.bench.report`**: a self-contained HTML report (`render_report`,
+  `write_report`) — inline CSS/JS, no CDN or external assets, per-adapter and
+  per-document tables, and reproduction metadata. Deterministic unless a
+  timestamp is supplied.
 - `docs/ECOSYSTEM_ASSESSMENT.md` and `docs/ROADMAP.md`.
 
 ## [0.1.0]

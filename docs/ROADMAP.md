@@ -39,7 +39,7 @@ Pure-stdlib package `pycontextfold.bench`:
 - Failure isolation: an adapter that errors is marked failed, not fatal.
 - JSON run artifacts.
 
-### Phase 3 — Self-contained HTML report
+### Phase 3 — Self-contained HTML report ✅
 - Single-file HTML with inline CSS/JS, no CDN, no external assets.
 - Tables for size/token/cost reduction and preservation; per-document drill-down.
 - Reproduction metadata (versions, seeds, config hash).
