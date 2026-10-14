@@ -6,6 +6,24 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- **`pycontextfold.bench`**: an offline-first benchmarking foundation.
+  - Immutable, JSON-round-trippable models (`Document`, `GroundTruth`,
+    `Dataset`, `ExperimentConfig`, `MetricResult`, `OptimizationResult`).
+  - Capability declarations (`Capability`, `CapabilitySet`) so adapters advertise
+    exactly what they support.
+  - Adapter protocol + registry with lazy, optional imports and availability
+    detection; built-in `baseline` (identity) and `contextfold` adapters.
+  - Deterministic baseline chunkers (`fixed_chars`, `fixed_bytes`, `paragraphs`,
+    `lines`) with lossless coverage.
+  - Honest token-measurement abstraction (approximate by default, exact only when
+    supplied).
+  - Core metrics: size/char/token reduction, ground-truth preservation recall and
+    drop precision — unavailable metrics are reported, never faked.
+  - Deterministic synthetic dataset and JSON/TOML configuration loading.
+- `docs/ECOSYSTEM_ASSESSMENT.md` and `docs/ROADMAP.md`.
+
 ## [0.1.0]
 
 Initial release.

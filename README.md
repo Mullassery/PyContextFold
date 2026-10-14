@@ -127,6 +127,31 @@ res = pcf.Engine().fold_request(req)
 When a budget cannot be met under the configured loss policy, the report
 contains `warnings: ["budget_not_met"]`; the engine does not silently drop code.
 
+## Benchmarking (offline, dependency-light)
+
+The `pycontextfold.bench` subpackage measures the trade-offs of folding: how much
+is removed (size/character/token reduction) versus how much matters (ground-truth
+preservation). It runs with nothing else installed and never touches the network.
+
+```python
+from pycontextfold import bench
+
+ds = bench.dataset.synthetic_dataset()
+reg = bench.adapters.default_registry()
+adapter = reg.get("contextfold")
+
+for doc in ds:
+    result = adapter.optimize(bench.OptimizationRequest(doc, method="safe"))
+    metrics = bench.metrics.document_metrics(doc, result, ds.ground_truth_for(doc.id))
+    print(doc.id, {m.name: round(m.value, 3) for m in metrics if m.available})
+```
+
+Optional ecosystem adapters (PyTokenCalc, PyStreamPDF, PyVectorHound, ...) are
+capability-declared and imported lazily; a requested-but-missing capability is
+reported as *unavailable* rather than silently substituted. See
+[`docs/ROADMAP.md`](docs/ROADMAP.md) and
+[`docs/ECOSYSTEM_ASSESSMENT.md`](docs/ECOSYSTEM_ASSESSMENT.md).
+
 ## Command-line tool (optional)
 
 Installing the package gives you the Python library. The repository also ships a
@@ -164,6 +189,8 @@ and determinism. See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 - [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md)
 - [`docs/INTEGRATIONS.md`](docs/INTEGRATIONS.md)
 - [`docs/BENCHMARKS.md`](docs/BENCHMARKS.md)
+- [`docs/ECOSYSTEM_ASSESSMENT.md`](docs/ECOSYSTEM_ASSESSMENT.md)
+- [`docs/ROADMAP.md`](docs/ROADMAP.md)
 
 ## License
 
