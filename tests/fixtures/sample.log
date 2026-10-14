@@ -1,0 +1,9 @@
+2024-01-02T03:04:05 INFO service started
+2024-01-02T03:04:06 INFO connecting to db
+2024-01-02T03:04:07 INFO connecting to db
+2024-01-02T03:04:08 INFO connecting to db
+2024-01-02T03:04:09 INFO connecting to db
+2024-01-02T03:04:10 WARN slow query
+2024-01-02T03:04:11 ERROR query failed id=10
+2024-01-02T03:04:12 ERROR query failed id=11
+2024-01-02T03:04:13 INFO done

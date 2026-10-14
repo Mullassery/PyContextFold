@@ -1,0 +1,52 @@
+[workspace]
+members = [
+    "crates/contextfold-core",
+    "crates/contextfold-parsers",
+    "crates/contextfold-cli",
+    "crates/contextfold-py",
+    "benches/contextfold-bench",
+]
+resolver = "2"
+exclude = ["fuzz"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.82"
+authors = ["Georgi Mullassery <mullassery@gmail.com>"]
+license = "Apache-2.0"
+repository = "https://github.com/Mullassery/PyContextFold"
+
+[workspace.dependencies]
+contextfold-core = { path = "crates/contextfold-core", version = "0.1.0" }
+contextfold-parsers = { path = "crates/contextfold-parsers", version = "0.1.0" }
+
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "2.0"
+anyhow = "1.0"
+
+# tree-sitter core + grammars. Grammar crates expose a `LANGUAGE`
+# `LanguageFn` and only depend on `tree-sitter-language`, so they are
+# compatible with the pinned tree-sitter core below.
+tree-sitter = "0.25"
+tree-sitter-python = "0.25"
+tree-sitter-rust = "0.24"
+tree-sitter-javascript = "0.25"
+tree-sitter-typescript = "0.23"
+tree-sitter-go = "0.25"
+
+clap = { version = "4.5", features = ["derive"] }
+pyo3 = { version = "0.23", features = ["extension-module", "abi3-py310"] }
+
+proptest = "1.6"
+criterion = "0.5"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+
+[profile.release-python]
+inherits = "release"
+strip = "symbols"

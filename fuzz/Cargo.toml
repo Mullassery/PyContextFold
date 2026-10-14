@@ -1,0 +1,32 @@
+[package]
+name = "contextfold-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2021"
+
+[package.metadata]
+cargo-fuzz = true
+
+# Detach from the parent workspace: fuzzing needs nightly and must not affect
+# `cargo build --workspace`.
+[workspace]
+
+[dependencies]
+libfuzzer-sys = "0.4"
+
+[dependencies.contextfold-core]
+path = "../crates/contextfold-core"
+
+[dependencies.contextfold-parsers]
+path = "../crates/contextfold-parsers"
+
+# Prevent this from being fuzzed by cargo-fuzz.
+[profile.release]
+debug = 1
+
+[[bin]]
+name = "fold"
+path = "fuzz_targets/fold.rs"
+test = false
+doc = false
+bench = false
