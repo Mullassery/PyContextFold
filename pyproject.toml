@@ -5,7 +5,7 @@ build-backend = "maturin"
 [project]
 name = "pycontextfold"
 dynamic = ["version"]
-description = "Local-first, structure-aware context optimization engine for LLM consumption. Rust core with Tree-sitter parsing, conservative profiles, preservation policies, budget-aware folding and transformation reports."
+description = "Structure-aware context optimization for LLM consumption. Shrink source code, documentation, logs and structured text before sending them to an LLM. Typed Python API with a fast, deterministic Rust core, Tree-sitter parsing, conservative profiles, preservation policies, budget-aware folding and transformation reports."
 readme = "README.md"
 requires-python = ">=3.10"
 

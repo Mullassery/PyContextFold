@@ -5,24 +5,68 @@
 [![CI](https://github.com/Mullassery/PyContextFold/actions/workflows/tests.yml/badge.svg)](https://github.com/Mullassery/PyContextFold/actions/workflows/tests.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 
-**Local-first, structure-aware context optimization for LLM consumption.**
+**A Python library for structure-aware context optimization for LLM consumption.**
 
-PyContextFold transforms source code, technical documentation, logs and
-structured text into compact representations. It is a *transformation engine for
-content you already have* — not an inference orchestrator, retrieval engine,
-token-counting library, PDF processor, or agent framework.
+PyContextFold shrinks source code, technical documentation, logs and structured
+text before you send them to an LLM — cutting token cost while keeping every
+transformation explicit, configurable and reportable. It is a local-first
+`pip install` with a fast, deterministic Rust core underneath, and it never
+sends your content anywhere.
 
-The core is written in Rust. Python is a thin, typed interface over the same
-native engine. There is also a standalone Rust library and CLI that do not
-require Python at runtime.
+It is a *transformation engine for content you already have* — not an inference
+orchestrator, retrieval engine, token-counting library, PDF processor, or agent
+framework.
 
-```text
-            ┌──────────────────────────────────────────────────────┐
-   input    │  parse → transform → prune → validate → report        │   output
- ─────────► │              (contextfold-core, Rust)                 │ ─────────►
-            └──────────────────────────────────────────────────────┘
-                     ▲ Tree-sitter grammars (contextfold-parsers)
+## Install
+
+```bash
+pip install pycontextfold
 ```
+
+Requires Python ≥ 3.10 (the wheel is built `abi3-py310`).
+
+## Quick start
+
+```python
+import pycontextfold as pcf
+
+result = pcf.fold(source, profile="safe", path="app.py")
+print(result.output)                       # transformed text
+print(result.report.detected_language)     # "python"
+print(result.report.reduction_ratio)       # e.g. 0.19
+print(result.report.syntax_valid)          # True
+print(result.report.to_dict())             # serialisable report
+```
+
+Fold a file without ever modifying it:
+
+```python
+result = pcf.fold_file("app.py", profile="code-review")
+open("app.folded.py", "w").write(result.output)
+```
+
+Introspection and full control:
+
+```python
+pcf.profiles()                  # ['budgeted', 'code-review', ...]
+pcf.profile_info("safe")        # {name, description, loss, ...}
+pcf.supported_languages()       # [...]
+pcf.detect_language("fn main() {}", path="a.rs")   # "rust"
+
+# Typed request object with budgets, protection and a caller-supplied tokenizer
+req = pcf.FoldRequest(
+    source,
+    profile="budgeted",
+    language="python",
+    budget_bytes=4096,
+    protected_ranges=[(0, 128)],          # keep the license header
+    protected_line_markers=["contextfold:keep"],
+)
+res = pcf.Engine().fold_request(req)
+```
+
+Errors are typed — `UnknownProfileError`, `InvalidConfigError`,
+`BudgetNotMetError` — all subclasses of `ContextFoldError`.
 
 ## What it owns (and what it deliberately does not)
 
@@ -46,61 +90,7 @@ optional integration, but there are no cross-repository dependencies.
 - **Honest about loss.** Lossy rules are labelled in the report. The engine
   **never claims semantic equivalence** — only, optionally, syntactic validity.
 - **Local-first.** No network access. Source content is never logged by default.
-- **Non-destructive.** Inputs are never overwritten unless you explicitly opt in
-  (`--in-place`).
-
-## Install
-
-### Rust (library + CLI)
-
-```bash
-cargo build --release
-# CLI binary at target/release/contextfold
-cargo install --path crates/contextfold-cli
-```
-
-### Python
-
-```bash
-pip install pycontextfold
-```
-
-Requires Python ≥ 3.10 (the wheel is built `abi3-py310`). To build the latest
-development version from source instead:
-
-```bash
-python -m venv .venv && source .venv/bin/activate
-pip install maturin
-maturin develop --release
-# or build a wheel:
-maturin build --release
-```
-
-## Quick start
-
-### CLI
-
-```bash
-# safe profile, stdin → stdout, JSON report to stderr
-echo 'print("hi")  # comment' | contextfold -p safe
-contextfold app.py -p safe --report report.json
-contextfold app.py -p interface-only --allow-lossy
-cat service.log | contextfold -p logs
-```
-
-### Python
-
-```python
-import pycontextfold as pcf
-
-result = pcf.fold(source, profile="safe", path="app.py")
-print(result.output)
-print(result.report.reduction_ratio, result.report.syntax_valid)
-
-# typed request object
-req = pcf.FoldRequest(source, profile="interface-only", language="python")
-res = pcf.Engine().fold_request(req)
-```
+- **Non-destructive.** Inputs are never overwritten unless you explicitly opt in.
 
 ## Profiles
 
@@ -119,9 +109,9 @@ See [`docs/PROFILES.md`](docs/PROFILES.md) for per-profile guarantees.
 ## Token budgets
 
 PyContextFold accepts a **target budget** but does not ship a provider
-tokenizer catalogue. Supply a tokenizer implementing `count(text) -> int`
-through the binding, or use byte/character budgets (clearly reported as
-approximations, never as token counts):
+tokenizer catalogue. Supply a tokenizer implementing `count(text) -> int`, or
+use byte/character budgets (clearly reported as approximations, never as token
+counts):
 
 ```python
 class MyTokenizer:
@@ -137,20 +127,34 @@ res = pcf.Engine().fold_request(req)
 When a budget cannot be met under the configured loss policy, the report
 contains `warnings: ["budget_not_met"]`; the engine does not silently drop code.
 
+## Command-line tool (optional)
+
+Installing the package gives you the Python library. The repository also ships a
+standalone `contextfold` CLI and a Rust library for non-Python use:
+
+```bash
+cargo install --path crates/contextfold-cli
+echo 'print("hi")  # comment' | contextfold -p safe
+contextfold app.py -p safe --report report.json
+```
+
 ## Architecture
 
 ```
+src/pycontextfold       Python package (public, typed API)
 crates/
-  contextfold-core      transformation pipeline + public Rust API (no Tree-sitter)
+  contextfold-core      transformation pipeline (no Tree-sitter)
   contextfold-parsers   Tree-sitter integration + format detection
   contextfold-cli       standalone CLI
   contextfold-py        PyO3 bindings (module: pycontextfold._core)
-src/pycontextfold       Python package (thin re-export + typed surface)
 tests/                  Python + preservation/integration tests
 crates/*/tests          Rust unit/integration tests
 benches/                reproducible benchmarks
 docs/                   architecture, profiles, guarantees, limitations
 ```
+
+Python is the primary interface; the Rust core exists for speed, memory safety
+and determinism. See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ## Documentation
 
