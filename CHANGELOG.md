@@ -22,6 +22,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   - Core metrics: size/char/token reduction, ground-truth preservation recall and
     drop precision — unavailable metrics are reported, never faked.
   - Deterministic synthetic dataset and JSON/TOML configuration loading.
+- **`pycontextfold.bench.runner`**: the offline experiment runner. Seeded,
+  deterministic, with failure isolation (per-document adapter errors and
+  unregistered/unavailable adapters are recorded, not fatal) and JSON run
+  artifacts (`RunResult`, `write_run`/`read_run`) carrying content hashes.
 - `docs/ECOSYSTEM_ASSESSMENT.md` and `docs/ROADMAP.md`.
 
 ## [0.1.0]

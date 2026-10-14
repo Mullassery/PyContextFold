@@ -33,7 +33,7 @@ Pure-stdlib package `pycontextfold.bench`:
 - Config loading (JSON always; TOML when `tomllib` is available) + validation.
 - Synthetic dataset loader (no network).
 
-### Phase 2 — Offline experiment runner
+### Phase 2 — Offline experiment runner ✅
 - Seeded experiment runner that pairs a dataset with adapters and metrics.
 - Deterministic `RunResult` serialization (stable key order, content hashes).
 - Failure isolation: an adapter that errors is marked failed, not fatal.
