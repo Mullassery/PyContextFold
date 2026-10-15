@@ -25,15 +25,15 @@ experiment runs. If a capability is missing, the affected metric is reported as
 
 | Repository | Import name | What it owns (we must not duplicate) | Status |
 |------------|-------------|--------------------------------------|--------|
-| PyTokenCalc | `pytokencalc` | Provider tokenization + cost estimation | Interface inspected |
-| PyInferenceManager | `pyinferencemanager` | Inference orchestration, retries, clients | Interface inspected |
-| PyStreamMCP | `pystreammcp` | Context discovery / source registry / MCP | Interface inspected |
-| PyVectorHound | `pyvectorhound` | Vector retrieval + retrieval diagnostics | Interface inspected |
-| PyAgentHound | `pyagenthound` | Agent execution tracing + root-cause | Interface inspected |
-| PyStreamPDF | `pystreampdf` | PDF extraction + semantic chunking | Interface inspected |
-| PyAPICheck | `pyapicheck` | API inventory, diff, policy scanning | Interface inspected |
-| PyStreamAI | `pystreamai` | Model routing / ONNX / deployment | Interface inspected |
-| OpenAnchor | `openanchor` | Token-intelligence middleware, attribution | Interface inspected |
+| PyTokenCalc | `pytokencalc` | Provider tokenization + cost estimation | Adapter implemented, tested (fixture) |
+| PyInferenceManager | `pyinferencemanager` | Inference orchestration, retries, clients | Adapter implemented, tested (fixture) |
+| PyStreamMCP | `pystreammcp` | Context discovery / source registry / MCP | Adapter implemented, tested (fixture) |
+| PyVectorHound | `pyvectorhound` | Vector retrieval + retrieval diagnostics | Adapter implemented, tested (fixture) |
+| PyAgentHound | `pyagenthound` | Agent execution tracing + root-cause | Adapter implemented, tested (fixture) |
+| PyStreamPDF | `pystreampdf` | PDF extraction + semantic chunking | Adapter implemented, tested (fixture) |
+| PyAPICheck | `pyapicheck` | API inventory, diff, policy scanning | Adapter implemented, tested (fixture) |
+| PyStreamAI | `pystreamai` | Model routing / ONNX / deployment | Adapter implemented, tested (fixture) |
+| OpenAnchor | `openanchor` | Token-intelligence middleware, attribution | Adapter implemented, tested (fixture) |
 
 ## Confirmed caller-facing interfaces
 

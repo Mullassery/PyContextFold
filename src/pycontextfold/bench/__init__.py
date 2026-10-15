@@ -11,7 +11,8 @@ Phase 1 provides the foundation: models, capabilities, the adapter protocol +
 registry, deterministic baselines, token measurement and metrics. Phase 2 adds
 the offline experiment runner (:mod:`pycontextfold.bench.runner`) and portable
 run-result artifacts (:mod:`pycontextfold.bench.runs`). Phase 3 adds a
-self-contained HTML report (:mod:`pycontextfold.bench.report`).
+self-contained HTML report (:mod:`pycontextfold.bench.report`). Phase 4 adds
+optional, capability-declared ecosystem adapters.
 """
 
 from __future__ import annotations

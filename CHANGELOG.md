@@ -30,6 +30,13 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   `write_report`) — inline CSS/JS, no CDN or external assets, per-adapter and
   per-document tables, and reproduction metadata. Deterministic unless a
   timestamp is supplied.
+- **`pycontextfold.bench.adapters`**: optional, capability-declared adapters for
+  the nine sibling projects (`pytokencalc`, `pyapicheck`, `pystreampdf`,
+  `pyvectorhound`, `pyagenthound`, `pyinferencemanager`, `pystreamai`,
+  `pystreammcp`, `openanchor`). Each imports its dependency lazily, reports
+  `available=False` when absent, and is tested against a fixture double. Adds
+  `core_registry()` and the `token_measurer()` bridge (exact tokens when
+  PyTokenCalc is present, otherwise a clearly-labelled approximation).
 - `docs/ECOSYSTEM_ASSESSMENT.md` and `docs/ROADMAP.md`.
 
 ## [0.1.0]

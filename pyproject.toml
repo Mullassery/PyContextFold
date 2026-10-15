@@ -50,3 +50,6 @@ include = ["LICENSE"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+markers = [
+    "optional: requires a real (optional) ecosystem package to be installed",
+]

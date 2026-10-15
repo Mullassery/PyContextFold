@@ -44,12 +44,13 @@ Pure-stdlib package `pycontextfold.bench`:
 - Tables for size/token/cost reduction and preservation; per-document drill-down.
 - Reproduction metadata (versions, seeds, config hash).
 
-### Phase 4 — Optional ecosystem adapters
+### Phase 4 — Optional ecosystem adapters ✅
 - `pytokencalc` (exact tokens + cost), `pystreampdf` (PDF ingestion),
   `pyapicheck` (ground-truth API surface), `pyvectorhound` (retrieval metrics),
   `pyagenthound` (agent metrics), `pyinferencemanager` / `pystreamai` (optional
   quality scoring), `pystreammcp` (corpus sourcing), `openanchor` (attribution).
-- Each tested against a fixture double; real-package tests marked optional.
+- Each tested against a fixture double; real-package tests marked `optional` and
+  skipped when the package is absent.
 
 ### Phase 5 — Quality gates & CLI
 - `pycontextfold bench run|report|datasets|adapters` subcommands.

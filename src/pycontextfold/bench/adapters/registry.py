@@ -63,6 +63,37 @@ class AdapterRegistry:
 def _build_default_registry() -> AdapterRegistry:
     from .baseline import BaselineAdapter
     from .contextfold import ContextFoldAdapter
+    from .openanchor import OpenAnchorAdapter
+    from .pyagenthound import PyAgentHoundAdapter
+    from .pyapicheck import PyAPICheckAdapter
+    from .pyinferencemanager import PyInferenceManagerAdapter
+    from .pystreamai import PyStreamAIAdapter
+    from .pystreammcp import PyStreamMCPAdapter
+    from .pystreampdf import PyStreamPDFAdapter
+    from .pytokencalc import PyTokenCalcAdapter
+    from .pyvectorhound import PyVectorHoundAdapter
+
+    return AdapterRegistry(
+        [
+            BaselineAdapter(),
+            ContextFoldAdapter(),
+            PyTokenCalcAdapter(),
+            PyAPICheckAdapter(),
+            PyStreamPDFAdapter(),
+            PyVectorHoundAdapter(),
+            PyAgentHoundAdapter(),
+            PyInferenceManagerAdapter(),
+            PyStreamAIAdapter(),
+            PyStreamMCPAdapter(),
+            OpenAnchorAdapter(),
+        ]
+    )
+
+
+def _build_core_registry() -> AdapterRegistry:
+    """Only the dependency-free adapters (baseline + core)."""
+    from .baseline import BaselineAdapter
+    from .contextfold import ContextFoldAdapter
 
     return AdapterRegistry([BaselineAdapter(), ContextFoldAdapter()])
 
@@ -71,10 +102,11 @@ _default: AdapterRegistry | None = None
 
 
 def default_registry() -> AdapterRegistry:
-    """The process-wide registry with the required built-in adapters.
+    """The process-wide registry with all built-in and ecosystem adapters.
 
-    Built-ins are the neutral baseline and the PyContextFold core adapter. Optional
-    ecosystem adapters register themselves lazily (Phase 4).
+    Ecosystem adapters are always registered but self-report ``available=False``
+    when their optional dependency is missing, so listing the registry never
+    requires any sibling package to be installed.
     """
     global _default
     if _default is None:
@@ -82,4 +114,9 @@ def default_registry() -> AdapterRegistry:
     return _default
 
 
-__all__ = ["AdapterRegistry", "default_registry"]
+def core_registry() -> AdapterRegistry:
+    """A fresh registry containing only the dependency-free adapters."""
+    return _build_core_registry()
+
+
+__all__ = ["AdapterRegistry", "core_registry", "default_registry"]
