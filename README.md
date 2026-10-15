@@ -197,12 +197,14 @@ contextfold app.py -p safe --report report.json
 
 ```
 src/pycontextfold       Python package (public, typed API)
+src/pycontextfold/bench offline benchmarking platform (adapters, runner, report, gates, CLI)
 crates/
   contextfold-core      transformation pipeline (no Tree-sitter)
   contextfold-parsers   Tree-sitter integration + format detection
   contextfold-cli       standalone CLI
   contextfold-py        PyO3 bindings (module: pycontextfold._core)
 tests/                  Python + preservation/integration tests
+tests/bench             benchmarking platform tests
 crates/*/tests          Rust unit/integration tests
 benches/                reproducible benchmarks
 docs/                   architecture, profiles, guarantees, limitations
@@ -219,6 +221,7 @@ and determinism. See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 - [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md)
 - [`docs/INTEGRATIONS.md`](docs/INTEGRATIONS.md)
 - [`docs/BENCHMARKS.md`](docs/BENCHMARKS.md)
+- [`docs/BENCHMARKING.md`](docs/BENCHMARKING.md)
 - [`docs/ECOSYSTEM_ASSESSMENT.md`](docs/ECOSYSTEM_ASSESSMENT.md)
 - [`docs/ROADMAP.md`](docs/ROADMAP.md)
 
