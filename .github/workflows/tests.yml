@@ -47,12 +47,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install maturin and pytest
-        run: python -m pip install --upgrade pip maturin pytest
+      - name: Install maturin, pytest and ruff
+        run: python -m pip install --upgrade pip maturin pytest ruff
+      - name: Lint (ruff)
+        run: ruff check src tests
       - name: Build extension (editable)
         run: maturin develop -m crates/contextfold-py/Cargo.toml
       - name: Run tests
         run: python -m pytest tests/ -q
+      - name: Benchmark CLI smoke test
+        run: python -m pycontextfold.bench adapters
 
   benches:
     name: Benchmarks compile

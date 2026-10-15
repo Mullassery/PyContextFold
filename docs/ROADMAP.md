@@ -20,7 +20,7 @@ Guiding constraints:
 - Read the nine sibling repositories and record confirmed interfaces.
 - See [`ECOSYSTEM_ASSESSMENT.md`](ECOSYSTEM_ASSESSMENT.md).
 
-### Phase 1 — Python benchmarking foundation 🚧
+### Phase 1 — Python benchmarking foundation ✅
 Pure-stdlib package `pycontextfold.bench`:
 - Versioned data models (`Document`, `GroundTruth`, `Dataset`, `ExperimentConfig`,
   `RunResult`, `MetricResult`).
@@ -58,10 +58,14 @@ Pure-stdlib package `pycontextfold.bench`:
 - Regression gates: an experiment fails (exit 1) when an aggregated metric drops
   below a threshold or is unavailable.
 
-### Phase 6 — Packaging, docs, release
-- Extras: `pycontextfold[bench]`, `pycontextfold[pdf]`, `pycontextfold[agents]`.
-- Cross-platform wheels (`maturin-action` in CI).
-- Extend docs and CHANGELOG; cut a release.
+### Phase 6 — Packaging, docs, release ✅
+- Per-project optional extras (`tokens`, `pdf`, `agents`, `api`, `retrieval`,
+  `inference`, `middleware`, `discovery`, plus an `ecosystem` bundle); the core
+  and the offline benchmark need none of them.
+- `pycontextfold-bench` console script, shipped in the wheel.
+- Cross-platform wheel + sdist workflow (`PyO3/maturin-action`) that publishes to
+  PyPI via trusted publishing on a `v*` tag.
+- Docs and CHANGELOG extended.
 
 ## Explicit non-goals
 

@@ -23,7 +23,11 @@ framework.
 pip install pycontextfold
 ```
 
-Requires Python ≥ 3.10 (the wheel is built `abi3-py310`).
+Requires Python ≥ 3.10 (the wheel is built `abi3-py310`). The core, the CLI and
+the offline benchmark need nothing else. Optional ecosystem adapters activate
+when their project is importable; install them individually, e.g.
+`pip install "pycontextfold[tokens]"`, `[pdf]`, `[agents]`, or `[ecosystem]` for
+all of them.
 
 ## Quick start
 

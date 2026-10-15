@@ -44,6 +44,10 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   `run|report|gates|adapters|datasets` subcommands, with a `pycontextfold-bench`
   console script. `run` can write a run artifact, an HTML report and evaluate
   gates (exit code 1 on failure).
+- **Packaging**: optional per-project extras (`tokens`, `pdf`, `agents`, `api`,
+  `retrieval`, `inference`, `middleware`, `discovery` and an `ecosystem` bundle)
+  and a cross-platform wheel/sdist release workflow (`PyO3/maturin-action` with
+  PyPI trusted publishing).
 - `docs/ECOSYSTEM_ASSESSMENT.md` and `docs/ROADMAP.md`.
 
 ## [0.1.0]

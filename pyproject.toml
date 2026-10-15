@@ -44,6 +44,29 @@ Issues = "https://github.com/Mullassery/PyContextFold/issues"
 
 [project.optional-dependencies]
 dev = ["pytest>=7.0", "maturin>=1.0", "ruff>=0.5.0"]
+# Optional ecosystem extras: each maps to a sibling project and activates one or
+# more benchmark adapters. All are optional — the core and the offline benchmark
+# run with none of them installed. Install the ones whose projects are reachable
+# from your package index.
+tokens = ["pytokencalc"]
+pdf = ["pystreampdf"]
+agents = ["pyagenthound"]
+api = ["pyapicheck"]
+retrieval = ["pyvectorhound"]
+inference = ["pyinferencemanager", "pystreamai"]
+middleware = ["openanchor"]
+discovery = ["pystreammcp"]
+ecosystem = [
+    "pytokencalc",
+    "pystreampdf",
+    "pyagenthound",
+    "pyapicheck",
+    "pyvectorhound",
+    "pyinferencemanager",
+    "pystreamai",
+    "openanchor",
+    "pystreammcp",
+]
 
 [tool.maturin]
 python-source = "src"
@@ -56,3 +79,7 @@ testpaths = ["tests"]
 markers = [
     "optional: requires a real (optional) ecosystem package to be installed",
 ]
+
+[tool.ruff]
+target-version = "py310"
+extend-exclude = ["tests/fixtures"]
