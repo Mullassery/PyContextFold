@@ -33,6 +33,9 @@ classifiers = [
 ]
 dependencies = []
 
+[project.scripts]
+pycontextfold-bench = "pycontextfold.bench.cli:main"
+
 [project.urls]
 Homepage = "https://github.com/Mullassery/PyContextFold"
 Documentation = "https://github.com/Mullassery/PyContextFold/blob/main/README.md"

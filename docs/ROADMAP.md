@@ -52,10 +52,11 @@ Pure-stdlib package `pycontextfold.bench`:
 - Each tested against a fixture double; real-package tests marked `optional` and
   skipped when the package is absent.
 
-### Phase 5 — Quality gates & CLI
-- `pycontextfold bench run|report|datasets|adapters` subcommands.
-- Regression gates: fail an experiment when reduction or preservation drops
-  below a threshold.
+### Phase 5 — Quality gates & CLI ✅
+- `pycontextfold-bench run|report|gates|adapters|datasets` subcommands (also
+  `python -m pycontextfold.bench`).
+- Regression gates: an experiment fails (exit 1) when an aggregated metric drops
+  below a threshold or is unavailable.
 
 ### Phase 6 — Packaging, docs, release
 - Extras: `pycontextfold[bench]`, `pycontextfold[pdf]`, `pycontextfold[agents]`.

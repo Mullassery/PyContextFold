@@ -166,6 +166,18 @@ run = bench.run_experiment(
 bench.write_report(run, "report.html")   # self-contained, deterministic
 ```
 
+There is also a CLI (offline, stdlib only):
+
+```bash
+pycontextfold-bench adapters                                  # list + availability
+pycontextfold-bench run --config exp.json --report report.html
+pycontextfold-bench run --config exp.json --gate              # exit 1 on gate failure
+pycontextfold-bench report run.json --out report.html
+```
+
+Gates turn a run into a regression check — an aggregated metric below its
+threshold, or an unavailable metric, fails the run.
+
 ## Command-line tool (optional)
 
 Installing the package gives you the Python library. The repository also ships a

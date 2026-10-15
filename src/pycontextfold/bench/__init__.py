@@ -12,7 +12,8 @@ registry, deterministic baselines, token measurement and metrics. Phase 2 adds
 the offline experiment runner (:mod:`pycontextfold.bench.runner`) and portable
 run-result artifacts (:mod:`pycontextfold.bench.runs`). Phase 3 adds a
 self-contained HTML report (:mod:`pycontextfold.bench.report`). Phase 4 adds
-optional, capability-declared ecosystem adapters.
+optional, capability-declared ecosystem adapters. Phase 5 adds quality gates
+(:mod:`pycontextfold.bench.gates`) and a CLI (:mod:`pycontextfold.bench.cli`).
 """
 
 from __future__ import annotations
@@ -22,6 +23,7 @@ from . import (
     chunking,
     config,
     dataset,
+    gates,
     metrics,
     models,
     report,
@@ -30,6 +32,7 @@ from . import (
     tokens,
 )
 from .capabilities import Capability, CapabilitySet
+from .gates import GateOutcome, GateReport, Threshold, evaluate_gates
 from .models import (
     DATASET_SCHEMA_VERSION,
     AdapterInfo,
@@ -55,16 +58,21 @@ __all__ = [
     "Document",
     "DocumentRun",
     "ExperimentConfig",
+    "GateOutcome",
+    "GateReport",
     "GroundTruth",
     "MetricResult",
     "OptimizationRequest",
     "OptimizationResult",
     "RunResult",
     "Runner",
+    "Threshold",
     "adapters",
     "chunking",
     "config",
     "dataset",
+    "evaluate_gates",
+    "gates",
     "metrics",
     "models",
     "render_report",

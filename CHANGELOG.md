@@ -37,6 +37,13 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   `available=False` when absent, and is tested against a fixture double. Adds
   `core_registry()` and the `token_measurer()` bridge (exact tokens when
   PyTokenCalc is present, otherwise a clearly-labelled approximation).
+- **`pycontextfold.bench.gates`**: quality/regression gates
+  (`Threshold`, `evaluate_gates`). An unavailable metric fails a gate rather than
+  passing silently.
+- **`pycontextfold.bench.cli`** + `python -m pycontextfold.bench`:
+  `run|report|gates|adapters|datasets` subcommands, with a `pycontextfold-bench`
+  console script. `run` can write a run artifact, an HTML report and evaluate
+  gates (exit code 1 on failure).
 - `docs/ECOSYSTEM_ASSESSMENT.md` and `docs/ROADMAP.md`.
 
 ## [0.1.0]
