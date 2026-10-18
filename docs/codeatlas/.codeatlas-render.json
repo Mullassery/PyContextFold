@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "outputs": {
+    "md": [
+      "benches.1.md",
+      "contextfold_bench.1.1.md",
+      "contextfold_cli.2.1.md",
+      "contextfold_core.2.2.md",
+      "contextfold_parsers.2.3.md",
+      "contextfold_py.2.4.md",
+      "crates.2.md",
+      "fuzz.4.md",
+      "overview.md",
+      "pycontextfold.5.1.md",
+      "src.5.md",
+      "tests.6.md"
+    ],
+    "html": [
+      "benches.1.html",
+      "contextfold_bench.1.1.html",
+      "contextfold_cli.2.1.html",
+      "contextfold_core.2.2.html",
+      "contextfold_parsers.2.3.html",
+      "contextfold_py.2.4.html",
+      "crates.2.html",
+      "fuzz.4.html",
+      "overview.html",
+      "pycontextfold.5.1.html",
+      "src.5.html",
+      "tests.6.html"
+    ]
+  }
+}
