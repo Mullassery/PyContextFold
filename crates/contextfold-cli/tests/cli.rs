@@ -11,12 +11,9 @@ fn run_stdin(args: &[&str], input: &str) -> (String, String, i32) {
         .stderr(Stdio::piped())
         .spawn()
         .expect("spawn");
-    child
-        .stdin
-        .as_mut()
-        .unwrap()
-        .write_all(input.as_bytes())
-        .unwrap();
+    if let Some(mut stdin) = child.stdin.take() {
+        let _ = stdin.write_all(input.as_bytes());
+    }
     let out = child.wait_with_output().unwrap();
     (
         String::from_utf8_lossy(&out.stdout).to_string(),

@@ -10,16 +10,16 @@ resolver = "2"
 exclude = ["fuzz"]
 
 [workspace.package]
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
-rust-version = "1.82"
-authors = ["Georgi Mullassery <mullassery@gmail.com>"]
-license = "Apache-2.0"
+rust-version = "1.75"
+license = "MIT"
 repository = "https://github.com/Mullassery/PyContextFold"
+authors = ["Georgi Mullassery"]
 
 [workspace.dependencies]
-contextfold-core = { path = "crates/contextfold-core", version = "0.1.0" }
-contextfold-parsers = { path = "crates/contextfold-parsers", version = "0.1.0" }
+contextfold-core = { path = "crates/contextfold-core", version = "0.1.2" }
+contextfold-parsers = { path = "crates/contextfold-parsers", version = "0.1.2" }
 
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
