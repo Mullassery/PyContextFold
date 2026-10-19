@@ -264,6 +264,7 @@ Full shipped/blocked/rejected detail: [`QUEUE_STATUS.md`](QUEUE_STATUS.md).
 - [`docs/BENCHMARKS.md`](docs/BENCHMARKS.md)
 - [`docs/BENCHMARKING.md`](docs/BENCHMARKING.md)
 - [`docs/ECOSYSTEM_ASSESSMENT.md`](docs/ECOSYSTEM_ASSESSMENT.md)
+- [`docs/BENCH_ADAPTERS.md`](docs/BENCH_ADAPTERS.md) — real vs fake adapter coverage
 - [`docs/ROADMAP.md`](docs/ROADMAP.md)
 
 ## License

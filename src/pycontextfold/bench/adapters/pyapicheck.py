@@ -53,7 +53,22 @@ class PyAPICheckAdapter(BaseAdapter):
                 "pyapicheck does not expose discover_directory/discover"
             )
         items: Iterable[Any] = discover(path)
-        names = {name for item in items if (name := _extract_name(item))}
+        names: set[str] = set()
+        for item in items:
+            # Real pyapicheck 0.8 returns {title, endpoints:[{method,path},...]}.
+            endpoints = item.get("endpoints") if isinstance(item, dict) else None
+            if isinstance(endpoints, list):
+                for endpoint in endpoints:
+                    if not isinstance(endpoint, dict):
+                        continue
+                    method = str(endpoint.get("method", "")).strip().upper()
+                    endpoint_path = endpoint.get("path")
+                    if endpoint_path:
+                        names.add(f"{method} {endpoint_path}".strip())
+                continue
+            name = _extract_name(item)
+            if name:
+                names.add(name)
         return tuple(sorted(names))
 
     def ground_truth(self, document_id: str, path: str) -> GroundTruth:

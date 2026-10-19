@@ -64,10 +64,14 @@ class PyTokenCalcAdapter(BaseAdapter):
         if model is None:
             value = estimate(tokens)
         else:
+            # Real pytokencalc 1.x: estimate_cost(model, input_tokens, output_tokens=0)
             try:
-                value = estimate(tokens, model=model, **kwargs)
+                value = estimate(model=model, input_tokens=tokens, **kwargs)
             except TypeError:
-                value = estimate(tokens, model, **kwargs)
+                try:
+                    value = estimate(tokens, model=model, **kwargs)
+                except TypeError:
+                    value = estimate(model, tokens, **kwargs)
         return float(value)
 
     def available_models(self) -> tuple[str, ...]:

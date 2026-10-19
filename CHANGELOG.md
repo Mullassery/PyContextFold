@@ -6,6 +6,14 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Fixed
+- Bench adapters now match the real sibling APIs: `pytokencalc.estimate_cost`
+  signature, `pyapicheck` endpoint inventory, `pyagenthound.evaluate_with_inspect`,
+  and `pyvectorhound.ranking.compute_reranker_metrics`.
+- Added real cross-repo adapter tests (`tests/bench/test_ecosystem_adapters_real.py`);
+  the existing fake-module tests are now explicitly labeled contract tests.
+  Untested integrations are documented in `docs/BENCH_ADAPTERS.md`.
+
 ### Added
 
 - **`pycontextfold.bench`**: an offline-first benchmarking foundation.

@@ -1,9 +1,9 @@
-"""Fixture-based tests for the optional ecosystem adapters.
+"""Fake-module contract tests for the optional ecosystem adapters.
 
-Each adapter is exercised against a lightweight *fake* module injected into
-``sys.modules`` that satisfies the documented contract. No sibling package needs
-to be installed. Tests that require the real package are marked ``optional`` and
-skipped when it is absent.
+These tests inject synthetic modules into ``sys.modules`` to check adapter
+logic. They are **not** evidence that a sibling package works. Real cross-repo
+coverage lives in ``tests/bench/test_ecosystem_adapters_real.py``; see
+``docs/BENCH_ADAPTERS.md`` for the tested/untested matrix.
 """
 
 from __future__ import annotations
@@ -67,7 +67,10 @@ def test_pytokencalc_measurer(monkeypatch):
 
 
 def test_pytokencalc_missing(monkeypatch):
-    monkeypatch.delitem(sys.modules, "pytokencalc", raising=False)
+    import pycontextfold.bench.adapters.base as base
+
+    monkeypatch.setattr(base, "_module_available", lambda name: name != "pytokencalc")
+    monkeypatch.setattr(base, "load_optional", lambda name: None if name == "pytokencalc" else __import__(name))
     adapter = PyTokenCalcAdapter()
     assert not adapter.is_available()
     with pytest.raises(AdapterError):
@@ -358,9 +361,11 @@ def test_capability_lookup_for_ecosystem():
 
 
 def test_token_measurer_falls_back_when_absent(monkeypatch):
+    import pycontextfold.bench.adapters.base as base
     from pycontextfold.bench.adapters import default_registry, token_measurer
 
-    monkeypatch.delitem(sys.modules, "pytokencalc", raising=False)
+    monkeypatch.setattr(base, "_module_available", lambda name: name != "pytokencalc")
+    monkeypatch.setattr(base, "load_optional", lambda name: None if name == "pytokencalc" else __import__(name))
     measurer = token_measurer(default_registry())
     assert measurer.exact is False
 

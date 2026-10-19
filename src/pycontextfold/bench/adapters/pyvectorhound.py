@@ -32,6 +32,11 @@ class PyVectorHoundAdapter(BaseAdapter):
             fn = getattr(module, attr, None)
             if callable(fn):
                 return fn
+        # Real pyvectorhound 1.8 exposes ranking.compute_reranker_metrics.
+        ranking = getattr(module, "ranking", None)
+        fn = getattr(ranking, "compute_reranker_metrics", None)
+        if callable(fn):
+            return fn
         raise AdapterError(
             "pyvectorhound does not expose evaluate/evaluate_retrieval"
         )

@@ -35,6 +35,9 @@ class PyAgentHoundAdapter(BaseAdapter):
         fn = getattr(module, "evaluate", None)
         if callable(fn):
             return fn
+        fn = getattr(module, "evaluate_with_inspect", None)
+        if callable(fn):
+            return fn
         evaluation = getattr(module, "evaluation", None)
         fn = getattr(evaluation, "evaluate", None)
         if callable(fn):
