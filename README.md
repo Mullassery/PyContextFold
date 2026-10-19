@@ -213,6 +213,11 @@ docs/                   architecture, profiles, guarantees, limitations
 Python is the primary interface; the Rust core exists for speed, memory safety
 and determinism. See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
+## Queue status
+
+Shipped, blocked/failed, and rejected work for this repository is documented in
+[`QUEUE_STATUS.md`](QUEUE_STATUS.md).
+
 ## Documentation
 
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
