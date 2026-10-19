@@ -37,6 +37,16 @@ from ._core import (
     profiles,
     supported_languages,
 )
+from .repo import PackedFile, RepoPack, pack_repository, write_pack
+from .tokenizers import (
+    HuggingFaceTokenizer,
+    TiktokenTokenizer,
+    TokenizerUnavailable,
+    count_tokens,
+    fold_file_with_model,
+    fold_with_model,
+    tokenizer_for,
+)
 
 __all__ = [
     "BudgetNotMetError",
@@ -44,14 +54,25 @@ __all__ = [
     "Engine",
     "FoldRequest",
     "FoldResult",
+    "HuggingFaceTokenizer",
     "InvalidConfigError",
+    "PackedFile",
+    "RepoPack",
     "Report",
+    "TiktokenTokenizer",
+    "TokenizerUnavailable",
     "UnknownProfileError",
     "__version__",
+    "count_tokens",
     "detect_language",
     "fold",
     "fold_file",
+    "fold_file_with_model",
+    "fold_with_model",
+    "pack_repository",
     "profile_info",
     "profiles",
     "supported_languages",
+    "tokenizer_for",
+    "write_pack",
 ]

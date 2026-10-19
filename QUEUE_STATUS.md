@@ -3,7 +3,7 @@
 This file records what was shipped, what is blocked/failed, and what is rejected for this repository. It complements `AUDIT_FINDINGS.md`.
 
 ## Shipped
-- No code changes; audit/bundle docs added.
+- tiktoken/Hugging Face tokenizer adapters and deterministic repository packing (`pack_repository`).
 
 ## Blocked / failed
 - Benchmark vs LLMLingua/Repomix with quality retention.

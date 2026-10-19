@@ -112,10 +112,23 @@ See [`docs/PROFILES.md`](docs/PROFILES.md) for per-profile guarantees.
 
 ## Token budgets
 
-PyContextFold accepts a **target budget** but does not ship a provider
-tokenizer catalogue. Supply a tokenizer implementing `count(text) -> int`, or
-use byte/character budgets (clearly reported as approximations, never as token
-counts):
+PyContextFold accepts a **target budget**. Built-in optional adapters map
+common models to real tokenizers, or you can supply any object implementing
+`count(text) -> int` / `name`:
+
+```bash
+pip install "pycontextfold[tiktoken]"   # OpenAI models
+pip install "pycontextfold[hf]"         # Hugging Face tokenizers
+```
+
+```python
+import pycontextfold as pcf
+
+result = pcf.fold_with_model(source, model="gpt-4o", budget_tokens=500)
+print(result.report.to_dict()["budget"])  # exact_tokens=True, tokenizer=...
+```
+
+Or use the lower-level request object with a custom tokenizer:
 
 ```python
 class MyTokenizer:
@@ -130,6 +143,24 @@ res = pcf.Engine().fold_request(req)
 
 When a budget cannot be met under the configured loss policy, the report
 contains `warnings: ["budget_not_met"]`; the engine does not silently drop code.
+
+## Repository packing
+
+Fold a whole repository into one LLM-ready bundle with ignore rules, a
+deterministic manifest and token counts:
+
+```python
+import pycontextfold as pcf
+
+pack = pcf.pack_repository(".", profile="safe", model="gpt-4o")
+pcf.write_pack(pack, "context.md", "context.manifest.txt")
+print(len(pack.files), pack.total_tokens)
+```
+
+Discovery skips VCS/build/dependency directories, honors `.gitignore` and
+`.contextfoldignore`, ignores binary/oversized files, and folds each text file
+through the same Rust profiles as single-file folding. The bundle and manifest
+are byte-identical across runs for the same input.
 
 ## Benchmarking (offline, dependency-light)
 
