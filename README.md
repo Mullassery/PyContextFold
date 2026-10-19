@@ -213,6 +213,16 @@ docs/                   architecture, profiles, guarantees, limitations
 Python is the primary interface; the Rust core exists for speed, memory safety
 and determinism. See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
+## Known issues and deferred work
+
+**Blocked / failed:**
+- Benchmark vs LLMLingua/Repomix with quality retention.
+
+**Rejected / deferred:**
+- Model inference/routing.
+
+Full shipped/blocked/rejected detail: [`QUEUE_STATUS.md`](QUEUE_STATUS.md).
+
 ## Queue status
 
 Shipped, blocked/failed, and rejected work for this repository is documented in
