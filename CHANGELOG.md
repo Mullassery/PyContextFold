@@ -58,6 +58,14 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   PyPI trusted publishing).
 - `docs/ECOSYSTEM_ASSESSMENT.md` and `docs/ROADMAP.md`.
 
+## [0.1.3] - 2026-10-24
+
+### Fixed
+- Use a package import for the benchmark adapter base so ruff's `PLR0402`
+  check passes.
+- Replace `Option::is_none_or` with `matches!` so the crate stays compatible
+  with its declared Rust 1.75 MSRV.
+
 ## [0.1.2] - 2026-10-18
 
 ### Fixed
