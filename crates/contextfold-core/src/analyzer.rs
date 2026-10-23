@@ -213,7 +213,7 @@ fn looks_like_markdown(sample: &str) -> bool {
     let mut list = false;
     for line in sample.lines().take(40) {
         let t = line.trim_start();
-        if t.starts_with('#') && t.chars().nth(1).is_none_or(|c| c == ' ' || c == '#') {
+        if t.starts_with('#') && matches!(t.chars().nth(1), None | Some(' ' | '#')) {
             heading = true;
         } else if t.starts_with("- ") || t.starts_with("* ") || t.starts_with("```") {
             list = true;

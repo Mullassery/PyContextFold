@@ -67,7 +67,7 @@ def test_pytokencalc_measurer(monkeypatch):
 
 
 def test_pytokencalc_missing(monkeypatch):
-    import pycontextfold.bench.adapters.base as base
+    from pycontextfold.bench.adapters import base
 
     monkeypatch.setattr(base, "_module_available", lambda name: name != "pytokencalc")
     monkeypatch.setattr(base, "load_optional", lambda name: None if name == "pytokencalc" else __import__(name))
@@ -361,8 +361,7 @@ def test_capability_lookup_for_ecosystem():
 
 
 def test_token_measurer_falls_back_when_absent(monkeypatch):
-    import pycontextfold.bench.adapters.base as base
-    from pycontextfold.bench.adapters import default_registry, token_measurer
+    from pycontextfold.bench.adapters import base, default_registry, token_measurer
 
     monkeypatch.setattr(base, "_module_available", lambda name: name != "pytokencalc")
     monkeypatch.setattr(base, "load_optional", lambda name: None if name == "pytokencalc" else __import__(name))
