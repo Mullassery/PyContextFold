@@ -51,6 +51,10 @@ jobs:
         run: python -m pip install --upgrade pip maturin pytest ruff
       - name: Lint (ruff)
         run: ruff check src tests
+      - name: Create virtualenv
+        run: |
+          python -m venv .venv
+          echo "$GITHUB_WORKSPACE/.venv/bin" >> "$GITHUB_PATH"
       - name: Build extension (editable)
         run: maturin develop -m crates/contextfold-py/Cargo.toml
       - name: Run tests

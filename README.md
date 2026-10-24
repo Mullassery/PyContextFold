@@ -252,7 +252,7 @@ and determinism. See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 **Rejected / deferred:**
 - Model inference/routing.
 
-Full shipped/blocked/rejected detail: [`QUEUE_STATUS.md`](QUEUE_STATUS.md).
+Full shipped/blocked/rejected detail: [`docs/internal/QUEUE_STATUS.md`](docs/internal/QUEUE_STATUS.md).
 
 ## Documentation
 
