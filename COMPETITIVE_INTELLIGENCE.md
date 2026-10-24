@@ -56,7 +56,9 @@ starts, and record the decision in the PR or changelog.
 
 ## OSS gap analysis — 2026-10-24
 
-**Scope.** Covers PyContextFold v0.1.3 as implemented here: Rust tree-sitter
+**What matters most here:** language coverage and remote ingestion. Six analyzers and local-only packing exclude most repos; add analyzers and a remote ingest path while keeping the explicit loss/preservation reporting that differentiates it.
+
+Scope: Covers PyContextFold v0.1.3 as implemented here: Rust tree-sitter
 folding for six languages, explicit preservation/loss profiles, token and byte
 budgets, repository packing, manifests, the CLI, and an offline benchmark.
 Compared with OSS context-compression and repository-packaging tools.
