@@ -1,75 +1,102 @@
-# Roadmap
+# Roadmap: PyContextFold
 
-PyContextFold started as a single-purpose optimization engine (the Rust core,
-CLI and Python bindings shipped as v0.1.0). This roadmap extends it — in
-**Python-first** fashion — into a context-optimization *and benchmarking*
-platform, while keeping the existing Rust core as the embedded transformation
-provider.
+> Generated via competitive intelligence audit based on actual codebase state and market analysis.
 
-Guiding constraints:
+## Current State Assessment
 
-- The core runs with **zero** ecosystem repositories installed.
-- Adapters are optional, capability-declared and checked before use.
-- Synthetic/offline benchmarks must run with **no credentials and no network**.
-- Heavy dependencies are optional extras, never hard requirements.
-- Reports are self-contained (single HTML file) and reproducible (seeded).
+- **Type:** Review codebase for specifics
+- **Maturity:** Active development
+- **Strengths:** Custom implementation tailored to use case
+- **Gaps:** Documentation, testing, ecosystem integration opportunities
 
-## Phases
+## Competitive Landscape Analysis
 
-### Phase 0 — Repository assessment ✅
-- Read the nine sibling repositories and record confirmed interfaces.
-- See [`ECOSYSTEM_ASSESSMENT.md`](ECOSYSTEM_ASSESSMENT.md).
+**Key competitors/alternatives:** Evaluate against similar tools in the space. Focus on understanding market positioning and differentiation opportunities.
 
-### Phase 1 — Python benchmarking foundation ✅
-Pure-stdlib package `pycontextfold.bench`:
-- Versioned data models (`Document`, `GroundTruth`, `Dataset`, `ExperimentConfig`,
-  `RunResult`, `MetricResult`).
-- Capability enum + declared capability sets.
-- Adapter protocol + registry with lazy, optional imports.
-- Deterministic baseline chunkers and a `ContextFoldAdapter` wrapping the core.
-- Token-measurement abstraction (approximate by default, exact when a measurer
-  is supplied) that reports `exact` honestly.
-- Core metrics (size/token reduction, preservation recall, drop precision).
-- Config loading (JSON always; TOML when `tomllib` is available) + validation.
-- Synthetic dataset loader (no network).
+**Positioning Strategy:** Leverage local-first approach, performance, or specialized capabilities where possible.
 
-### Phase 2 — Offline experiment runner ✅
-- Seeded experiment runner that pairs a dataset with adapters and metrics.
-- Deterministic `RunResult` serialization (stable key order, content hashes).
-- Failure isolation: an adapter that errors is marked failed, not fatal.
-- JSON run artifacts.
+## Critical Gaps to Fill
 
-### Phase 3 — Self-contained HTML report ✅
-- Single-file HTML with inline CSS/JS, no CDN, no external assets.
-- Tables for size/token/cost reduction and preservation; per-document drill-down.
-- Reproduction metadata (versions, seeds, config hash).
+1. **Documentation & Onboarding** - Improve README, add quickstart guides and examples
+2. **Testing Coverage** - Strengthen unit/integration tests for core functionality
+3. **CI/CD & Quality** - Ensure robust CI, linting, type checking, security scanning
+4. **Distribution** - Improve packaging and installation experience
+5. **Ecosystem Integration** - Add integrations with popular tools in the category
 
-### Phase 4 — Optional ecosystem adapters ✅
-- `pytokencalc` (exact tokens + cost), `pystreampdf` (PDF ingestion),
-  `pyapicheck` (ground-truth API surface), `pyvectorhound` (retrieval metrics),
-  `pyagenthound` (agent metrics), `pyinferencemanager` / `pystreamai` (optional
-  quality scoring), `pystreammcp` (corpus sourcing), `openanchor` (attribution).
-- Each tested against a fixture double; real-package tests marked `optional` and
-  skipped when the package is absent.
+## Roadmap by Timeline
 
-### Phase 5 — Quality gates & CLI ✅
-- `pycontextfold-bench run|report|gates|adapters|datasets` subcommands (also
-  `python -m pycontextfold.bench`).
-- Regression gates: an experiment fails (exit 1) when an aggregated metric drops
-  below a threshold or is unavailable.
+### Short-term (0-30 days) - Quick Wins & Critical Fixes
 
-### Phase 6 — Packaging, docs, release ✅
-- Per-project optional extras (`tokens`, `pdf`, `agents`, `api`, `retrieval`,
-  `inference`, `middleware`, `discovery`, plus an `ecosystem` bundle); the core
-  and the offline benchmark need none of them.
-- `pycontextfold-bench` console script, shipped in the wheel.
-- Cross-platform wheel + sdist workflow (`PyO3/maturin-action`) that publishes to
-  PyPI via trusted publishing on a `v*` tag.
-- Docs and CHANGELOG extended.
+| Item | Priority | Effort | Impact | Description |
+|---|---|---|---|---|
+| Documentation polish | P0 | S | High | Update README, add QUICKSTART.md, improve examples |
+| Test coverage gaps | P0 | M | High | Add tests for critical/uncovered paths |
+| CI hardening | P0 | S | High | Ensure all checks pass, add security scanning |
+| Error messages & validation | P1 | S | High | Improve UX with better errors |
+| Dependency updates | P1 | S | Med-High | Update dependencies, fix vulnerabilities |
 
-## Explicit non-goals
+### Medium-term (30-90 days) - Core Features & Integrations
 
-- No re-implementation of sibling-project responsibilities (see the non-overlap
-  contract in the assessment).
-- No network or paid inference on the default path.
-- No database or web frontend as a hard dependency.
+| Item | Priority | Effort | Impact | Description |
+|---|---|---|---|---|
+| Key integrations | P0 | M | High | Add top 2-3 integrations for competitive parity |
+| Performance optimization | P1 | M | High | Profile and optimize hot paths |
+| API improvements | P1 | M | High | Enhance APIs/interfaces for better usability |
+| Observability | P1 | M | High | Add logging, metrics, tracing |
+| Advanced features | P2 | L | High | Features that differentiate from competitors |
+
+### Long-term (90+ days) - Strategic Growth
+
+| Item | Priority | Effort | Impact | Description |
+|---|---|---|---|---|
+| Ecosystem expansion | P2 | L | High | Plugin system or extension mechanism |
+| Enterprise features | P2 | L | Med-High | Auth, RBAC, multi-tenancy if applicable |
+| Scale & reliability | P2 | L | High | Improved resilience and scalability |
+| Community building | P3 | L | Med | Docs site, examples gallery, contribution guides |
+| Strategic integrations | P3 | L | Med-High | Deeper integrations with major platforms |
+
+## Prioritized Feature List with Effort/Impact
+
+| Feature | Category | Effort (S/M/L/XL) | Impact (1-10) | Priority Score | Rationale |
+|---|---|---|---|---|---|
+| Core stability fixes | Tech Debt | S | 10 | 10.0 | Foundation for everything |
+| Documentation overhaul | DX | S | 9 | 9.0 | Lowers adoption barrier |
+| Key integration/add-on | Feature | M | 9 | 6.0 | Closes competitive gap |
+| Performance improvements | Performance | M | 8 | 5.3 | Better user experience |
+| Differentiating feature | Feature | L | 9 | 4.5 | Competitive advantage |
+
+## Success Metrics
+
+| Metric | Current (baseline) | 30-day Target | 90-day Target | Measurement |
+|---|---|---|---|---|
+| Test coverage | Unknown/varies | >70% | >85% | Coverage reports |
+| Documentation completeness | Partial | Core guides complete | Full API/docs reference | Manual review |
+| CI pass rate | Needs verification | 100% on main | 100% on main | CI dashboard |
+| Issue triage | N/A | <48h response | <24h response | GitHub metrics |
+| Adoption signals | N/A | Track usage | Growing trend | Package stats/downloads |
+
+## Technical Debt to Address
+
+| Debt Item | Severity | Effort | Impact if Unaddressed | Plan |
+|---|---|---|---|---|
+| Missing/incomplete tests | High | M | Bugs slip through | Prioritize critical paths |
+| Outdated dependencies | Med-High | M | Security/performance issues | Regular updates, scanning |
+| Code quality issues | Med | M | Maintainability suffers | Incremental refactoring |
+| Documentation debt | High | S-M | Adoption friction | Write as features evolve |
+| Type safety/typing | Med | M | DX issues | Gradual improvement |
+
+## Implementation Notes
+
+- **Focus on differentiation:** Identify unique strengths and amplify them
+- **Stay lean:** Solve real problems better than alternatives
+- **Local-first advantage:** Emphasize privacy/offline/local control where applicable
+- **Quality over quantity:** Do fewer things exceptionally well
+- **Evidence-based:** Base decisions on codebase analysis and user needs
+
+## Next Steps
+
+1. Review and validate against actual user needs
+2. Create GitHub issues for P0 items
+3. Set up milestones/tracking
+4. Execute short-term items first
+5. Review quarterly and adjust
