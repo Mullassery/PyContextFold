@@ -16,7 +16,7 @@ redact PII, sanitise untrusted code for execution, or enforce policy. See
 If you believe you have found a security issue (for example, a parser panic or
 unbounded memory growth on crafted input), please report it privately:
 
-- Open a [GitHub security advisory](https://github.com/Mullassery/PyContextFold/security/advisories/new), or
+- Open a [GitHub security advisory](../PyContextFold/security/advisories/new), or
 - Email the maintainer at <mullassery@gmail.com>.
 
 Please include a minimal reproducer (input bytes and the profile/options used).

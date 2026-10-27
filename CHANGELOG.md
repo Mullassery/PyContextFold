@@ -104,5 +104,5 @@ Initial release.
   whitespace invariants), CLI integration tests and a Python test suite.
 - Reproducible criterion benchmarks and documentation under `docs/`.
 
-[Unreleased]: https://github.com/Mullassery/PyContextFold/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/Mullassery/PyContextFold/releases/tag/v0.1.0
+[Unreleased]: ../PyContextFold/compare/v0.1.0...HEAD
+[0.1.0]: ../PyContextFold/releases/tag/v0.1.0

@@ -2,7 +2,7 @@
 
 [![PyPI](https://img.shields.io/pypi/v/pycontextfold.svg)](https://pypi.org/project/pycontextfold/)
 [![Python versions](https://img.shields.io/pypi/pyversions/pycontextfold.svg)](https://pypi.org/project/pycontextfold/)
-[![CI](https://github.com/Mullassery/PyContextFold/actions/workflows/tests.yml/badge.svg)](https://github.com/Mullassery/PyContextFold/actions/workflows/tests.yml)
+[![CI](../PyContextFold/actions/workflows/tests.yml/badge.svg)](../PyContextFold/actions/workflows/tests.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 
 **A Python library for structure-aware context optimization for LLM consumption.**

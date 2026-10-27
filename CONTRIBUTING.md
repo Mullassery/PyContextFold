@@ -6,7 +6,7 @@ minimal, well-tested** changes.
 ## Getting started
 
 ```bash
-git clone https://github.com/Mullassery/PyContextFold.git
+git clone ../PyContextFold
 cd PyContextFold
 cargo test --workspace            # Rust unit + integration + property tests
 
